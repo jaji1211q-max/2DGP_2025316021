@@ -71,9 +71,6 @@ open_canvas(800, 600)
 boy = load_image('character.png')
 
 while True:
-    print('move_circle')
     move_circle()
-    print('move_rectangle')
     move_rectangle()
-    print('move_triangle')
     move_triangle()
