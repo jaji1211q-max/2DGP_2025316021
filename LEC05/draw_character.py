@@ -70,4 +70,7 @@ def move_c():
 open_canvas(800, 600)
 boy = load_image('character.png')
 
-move_triangle()
+while True:
+    move_circle()
+    move_rectangle()
+    move_triangle()
