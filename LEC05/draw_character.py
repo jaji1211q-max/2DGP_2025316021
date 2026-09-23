@@ -29,6 +29,10 @@ def move_top():
     for x in range(50, 751, 5):
         draw_boy(x, 550)
 
+def move_right():
+    for y in range(550, 49, -5):
+        draw_boy(750, y)
+
 
 open_canvas(800, 600)
 boy = load_image('character.png')
