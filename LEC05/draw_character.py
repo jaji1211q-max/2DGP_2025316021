@@ -37,7 +37,11 @@ def move_left():
     for y in range(50, 551, 5):
         draw_boy(50, y)
 
-        
+def move_bottom():
+    for x in range(750, 49, -5):
+        draw_boy(x, 50)
+
+      
 open_canvas(800, 600)
 boy = load_image('character.png')
 
