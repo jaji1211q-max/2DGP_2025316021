@@ -17,7 +17,7 @@ def move_rectangle():
     move_left()
 
 def move_triangle():
-    pass
+     move_a()
 
 def draw_boy(x, y):
     clear_canvas()
@@ -41,7 +41,14 @@ def move_bottom():
     for x in range(750, 49, -5):
         draw_boy(x, 50)
 
-      
+def move_a():
+    n = 60
+    for step in range(n + 1):
+        t = step / n
+        x = 100 + (700 - 100) * t
+        y = 100 + (100 - 100) * t
+        draw_boy(x, y)
+
 open_canvas(800, 600)
 boy = load_image('character.png')
 
