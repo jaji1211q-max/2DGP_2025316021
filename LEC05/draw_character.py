@@ -7,10 +7,7 @@ def move_circle():
         x = 400 + 200 * math.cos(theta)
         y = 300 + 200 * math.sin(theta)
 
-        clear_canvas()
-        boy.draw(x, y)
-        update_canvas()
-        delay(0.01)
+        draw_boy(x, y)
 
 
 def move_rectangle():
@@ -21,6 +18,12 @@ def move_rectangle():
 
 def move_triangle():
     pass
+
+def draw_boy(x, y):
+    clear_canvas()
+    boy.draw(x, y)
+    update_canvas()
+    delay(0.01)
 
 
 open_canvas(800, 600)
