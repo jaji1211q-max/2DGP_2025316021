@@ -25,6 +25,10 @@ def draw_boy(x, y):
     update_canvas()
     delay(0.01)
 
+def move_top():
+    for x in range(50, 751, 5):
+        draw_boy(x, 550)
+
 
 open_canvas(800, 600)
 boy = load_image('character.png')
