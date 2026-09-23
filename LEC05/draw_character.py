@@ -48,10 +48,16 @@ def move_a():
         x = 100 + (700 - 100) * t
         y = 100 + (100 - 100) * t
         draw_boy(x, y)
+def move_b():
+    n = 60
+    for step in range(n + 1):
+        t = step / n
+        x = 700 + (400 - 700) * t
+        y = 100 + (500 - 100) * t
+        draw_boy(x, y)
+
 
 open_canvas(800, 600)
 boy = load_image('character.png')
 
-move_circle()
-move_rectangle()
-
+move_a()
