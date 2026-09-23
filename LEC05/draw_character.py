@@ -18,6 +18,8 @@ def move_rectangle():
 
 def move_triangle():
      move_a()
+     move_b()
+     move_c()
 
 def draw_boy(x, y):
     clear_canvas()
@@ -68,4 +70,4 @@ def move_c():
 open_canvas(800, 600)
 boy = load_image('character.png')
 
-move_a()
+move_triangle()
