@@ -56,7 +56,15 @@ def move_b():
         y = 100 + (500 - 100) * t
         draw_boy(x, y)
 
+def move_c():
+    n = 60
+    for step in range(n + 1):
+        t = step / n
+        x = 400 + (100 - 400) * t
+        y = 500 + (100 - 500) * t
+        draw_boy(x, y)
 
+    
 open_canvas(800, 600)
 boy = load_image('character.png')
 
