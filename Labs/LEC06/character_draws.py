@@ -41,6 +41,9 @@ def move_triangle():
     move_b()
     move_c()
 
+def move_a():
+    print("a")
+    
 def draw_boy(x,y):
     clear_canvas()
     boy.draw(x, y)
@@ -54,6 +57,6 @@ boy = load_image('character.png')
 
 while True:
     #move_circle()
-    move_rectangle()
+    #move_rectangle()
     move_triangle()
 
