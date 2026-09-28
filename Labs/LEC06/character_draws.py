@@ -37,7 +37,9 @@ def move_left():
     pass
 
 def move_triangle():
-    pass
+    move_a()
+    move_b()
+    move_c()
 
 def draw_boy(x,y):
     clear_canvas()
