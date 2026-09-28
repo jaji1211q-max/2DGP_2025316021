@@ -11,9 +11,9 @@ def move_circle():
         draw_boy(x, y)
 
 def move_rectangle():
-   # move_top()
-   # move_right()
-   # move_bottom()
+    move_top()
+    move_right()
+    move_bottom()
     move_left()
 
 def move_top():
