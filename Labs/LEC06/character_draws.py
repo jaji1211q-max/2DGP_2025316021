@@ -37,16 +37,18 @@ def move_left():
     pass
 
 def move_triangle():
-    move_a()
+   # move_a()
     move_b()
     move_c()
 
-def move_a():
+def move_b():
     for x in range(100, 400, 5):
         draw_boy(x, 100)
 
-def move_b():
-    print("b")
+def move_a():
+    for x in range(400, 100, -5):
+        y = 100 + (x - 100) * (400 - 100) / (400 - 100)
+        draw_boy(x, y)
 
 def move_c():
     print("c")
