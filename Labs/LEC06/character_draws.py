@@ -11,7 +11,7 @@ def move_circle():
         draw_boy(x, y)
 
 def move_rectangle():
-    move_top()
+   # move_top()
     move_right()
     move_bottom()
     move_left()
@@ -22,7 +22,8 @@ def move_top():
     pass
 
 def move_right():
-    print("right")      
+    for x in range(100,600,5):
+        draw_boy(x, 500)
     pass
 
 def move_bottom():
@@ -48,7 +49,7 @@ open_canvas(800, 600)
 boy = load_image('character.png')
 
 while True:
-    move_circle()
+    #move_circle()
     move_rectangle()
     move_triangle()
 
