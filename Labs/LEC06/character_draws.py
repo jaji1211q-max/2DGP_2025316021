@@ -44,6 +44,8 @@ def move_triangle():
 def move_a():
     print("a")
     
+def move_b():
+    print("b")
 def draw_boy(x,y):
     clear_canvas()
     boy.draw(x, y)
