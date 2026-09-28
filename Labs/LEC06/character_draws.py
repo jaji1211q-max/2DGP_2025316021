@@ -42,7 +42,8 @@ def move_triangle():
     move_c()
 
 def move_a():
-    print("a")
+    for x in range(100, 400, 5):
+        draw_boy(x, 100)
 
 def move_b():
     print("b")
@@ -50,7 +51,7 @@ def move_b():
 def move_c():
     print("c")
 
-    
+
 def draw_boy(x,y):
     clear_canvas()
     boy.draw(x, y)
