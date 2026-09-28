@@ -13,7 +13,7 @@ def move_circle():
 def move_rectangle():
    # move_top()
    # move_right()
-    move_bottom()
+   # move_bottom()
     move_left()
 
 def move_top():
@@ -32,7 +32,8 @@ def move_bottom():
     pass
 
 def move_left():
-    print("left")
+    for x in range(600,100,-5):
+        draw_boy(x, 100)
     pass
 
 def move_triangle():
