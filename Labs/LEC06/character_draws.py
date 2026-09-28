@@ -12,7 +12,7 @@ def move_circle():
 
 def move_rectangle():
    # move_top()
-    move_right()
+   # move_right()
     move_bottom()
     move_left()
 
@@ -27,7 +27,8 @@ def move_right():
     pass
 
 def move_bottom():
-    print("bottom")
+    for y in range(500,100,-5):
+        draw_boy(600, y)
     pass
 
 def move_left():
