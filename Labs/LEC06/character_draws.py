@@ -17,7 +17,8 @@ def move_rectangle():
     move_left()
 
 def move_top():
-    print("top")
+    for y in range(200, 500, 5):
+        draw_boy(100, y)
     pass
 
 def move_right():
