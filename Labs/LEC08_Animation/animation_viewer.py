@@ -32,6 +32,14 @@ WALK_CLIP = AnimationClip(
     frames=tuple(SpriteFrame(left, 0) for left in range(0, 512, FRAME_WIDTH)),
     frame_duration=0.08,
 )
+JUMP_CLIP = AnimationClip(
+    frames=tuple(SpriteFrame(left, 96) for left in (160, 192, 224)),
+    frame_duration=0.12,
+)
+ATTACK_CLIP = AnimationClip(
+    frames=tuple(SpriteFrame(left, 144) for left in (0, 32, 64, 96, 128)),
+    frame_duration=0.10,
+)
 
 
 def main():
