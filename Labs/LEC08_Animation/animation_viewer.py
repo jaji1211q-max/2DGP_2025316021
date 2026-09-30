@@ -12,6 +12,12 @@ GRASS_PATH = Path(__file__).with_name("grass.png")
 FRAME_WIDTH = 32
 FRAME_HEIGHT = 48
 SPRITE_SCALE = 8
+START_X = 120.0
+CENTER_X = CANVAS_WIDTH / 2
+GROUND_Y = 400.0
+WALK_SPEED = 240.0
+JUMP_DURATION = 0.9
+ATTACK_DURATION = len(ATTACK_CLIP.frames) * ATTACK_CLIP.frame_duration
 
 
 @dataclass(frozen=True)
@@ -55,8 +61,8 @@ class Phase(Enum):
 @dataclass
 class AnimationState:
     phase: Phase = Phase.WALK_TO_CENTER
-    x: float = 120.0
-    y: float = 400.0
+    x: float = START_X
+    y: float = GROUND_Y
     facing_right: bool = True
     frame_index: int = 0
     frame_elapsed: float = 0.0
