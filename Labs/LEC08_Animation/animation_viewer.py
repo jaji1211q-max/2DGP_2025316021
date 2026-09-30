@@ -103,6 +103,25 @@ def draw_frame(
     )
 
 
+def clip_for_phase(phase: Phase) -> AnimationClip:
+    if phase in (Phase.WALK_TO_CENTER, Phase.WALK_TO_LEFT):
+        return WALK_CLIP
+    if phase is Phase.JUMP:
+        return JUMP_CLIP
+    return ATTACK_CLIP
+
+
+def advance_frame(state: AnimationState, delta_time: float) -> None:
+    clip = clip_for_phase(state.phase)
+    state.frame_elapsed += delta_time
+    while state.frame_elapsed >= clip.frame_duration:
+        state.frame_elapsed -= clip.frame_duration
+        if state.phase in (Phase.WALK_TO_CENTER, Phase.WALK_TO_LEFT):
+            state.frame_index = (state.frame_index + 1) % len(clip.frames)
+        else:
+            state.frame_index = min(state.frame_index + 1, len(clip.frames) - 1)
+
+
 def draw_scene(grass) -> None:
     clear_canvas()
     grass.draw(CANVAS_WIDTH // 2, 150, CANVAS_WIDTH, 100)
