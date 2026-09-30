@@ -146,6 +146,7 @@ def update_jump(state: AnimationState, delta_time: float) -> None:
     state.action_elapsed += delta_time
     progress = min(state.action_elapsed / JUMP_DURATION, 1.0)
     state.y = GROUND_Y + 180 * 4 * progress * (1 - progress)
+    state.frame_index = min(int(progress * len(JUMP_CLIP.frames)), len(JUMP_CLIP.frames) - 1)
     if progress >= 1.0:
         state.y = GROUND_Y
         enter_phase(state, Phase.ATTACK)
