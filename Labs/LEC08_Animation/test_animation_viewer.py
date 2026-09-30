@@ -3,12 +3,33 @@ import unittest
 import animation_viewer as viewer
 
 
+class SpriteSheetStub:
+    h = 416
+
+    def clip_composite_draw(self, *arguments):
+        self.arguments = arguments
+
+
 class AnimationViewerTests(unittest.TestCase):
     def test_configured_frames_fit_sprite_sheet(self):
         viewer.validate_clips(544, 416)
 
     def test_frame_source_y_uses_pico2d_bottom_origin(self):
         self.assertEqual(viewer.SpriteFrame(0, 0).bottom_origin(416), 368)
+
+    def test_left_facing_frame_is_flipped_and_scaled(self):
+        sprite_sheet = SpriteSheetStub()
+
+        viewer.draw_frame(
+            sprite_sheet,
+            viewer.WALK_CLIP.frames[0],
+            160,
+            viewer.GROUND_Y,
+            facing_right=False,
+        )
+
+        self.assertEqual(sprite_sheet.arguments[5], "h")
+        self.assertEqual(sprite_sheet.arguments[8:], (256, 384))
 
     def test_walk_cycle_has_sixteen_frames(self):
         self.assertEqual(len(viewer.WALK_CLIP.frames), 16)
