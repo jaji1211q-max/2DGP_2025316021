@@ -9,6 +9,7 @@ CANVAS_HEIGHT = 800
 SPRITE_PATH = Path(__file__).with_name("sprites_fullsize.png")
 FRAME_WIDTH = 32
 FRAME_HEIGHT = 48
+SPRITE_SCALE = 8
 
 
 @dataclass(frozen=True)
@@ -54,13 +55,40 @@ def validate_clips(sheet_width: int, sheet_height: int) -> None:
                 raise ValueError(f"Sprite frame is outside the sheet: {frame}")
 
 
+def draw_frame(
+    sprite_sheet,
+    frame: SpriteFrame,
+    x: float,
+    y: float,
+    facing_right: bool = True,
+) -> None:
+    flip = "" if facing_right else "h"
+    sprite_sheet.clip_composite_draw(
+        frame.left,
+        frame.bottom_origin(sprite_sheet.h),
+        frame.width,
+        frame.height,
+        0,
+        flip,
+        x,
+        y,
+        frame.width * SPRITE_SCALE,
+        frame.height * SPRITE_SCALE,
+    )
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
         sprite_sheet = load_image(str(SPRITE_PATH))
         validate_clips(sprite_sheet.w, sprite_sheet.h)
         clear_canvas()
-        sprite_sheet.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
+        draw_frame(
+            sprite_sheet,
+            WALK_CLIP.frames[0],
+            CANVAS_WIDTH // 2,
+            CANVAS_HEIGHT // 2,
+        )
         update_canvas()
         delay(0.5)
     finally:
