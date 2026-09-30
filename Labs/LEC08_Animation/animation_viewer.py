@@ -142,6 +142,15 @@ def update_walk_to_center(state: AnimationState, delta_time: float) -> None:
         enter_phase(state, Phase.JUMP)
 
 
+def update_jump(state: AnimationState, delta_time: float) -> None:
+    state.action_elapsed += delta_time
+    progress = min(state.action_elapsed / JUMP_DURATION, 1.0)
+    state.y = GROUND_Y + 180 * 4 * progress * (1 - progress)
+    if progress >= 1.0:
+        state.y = GROUND_Y
+        enter_phase(state, Phase.ATTACK)
+
+
 def draw_scene(grass) -> None:
     clear_canvas()
     grass.draw(CANVAS_WIDTH // 2, 150, CANVAS_WIDTH, 100)
