@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from pathlib import Path
 
 from pico2d import *
@@ -6,6 +7,19 @@ from pico2d import *
 CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 800
 SPRITE_PATH = Path(__file__).with_name("sprites_fullsize.png")
+FRAME_WIDTH = 32
+FRAME_HEIGHT = 48
+
+
+@dataclass(frozen=True)
+class SpriteFrame:
+    left: int
+    top: int
+    width: int = FRAME_WIDTH
+    height: int = FRAME_HEIGHT
+
+    def bottom_origin(self, sheet_height: int) -> int:
+        return sheet_height - self.top - self.height
 
 
 def main():
