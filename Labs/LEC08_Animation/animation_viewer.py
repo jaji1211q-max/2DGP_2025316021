@@ -38,7 +38,7 @@ class AnimationClip:
 
 
 WALK_CLIP = AnimationClip(
-    frames=tuple(SpriteFrame(left, 0) for left in range(0, 512, FRAME_WIDTH)),
+    frames=tuple(SpriteFrame(left, 0) for left in range(16, 512, FRAME_WIDTH)),
     frame_duration=0.08,
 )
 JUMP_CLIP = AnimationClip(
@@ -46,7 +46,7 @@ JUMP_CLIP = AnimationClip(
     frame_duration=0.12,
 )
 ATTACK_CLIP = AnimationClip(
-    frames=tuple(SpriteFrame(left, 144) for left in (0, 32, 64, 96, 128)),
+    frames=tuple(SpriteFrame(left, 144) for left in (16, 48, 80, 112, 144)),
     frame_duration=0.10,
 )
 ATTACK_DURATION = len(ATTACK_CLIP.frames) * ATTACK_CLIP.frame_duration

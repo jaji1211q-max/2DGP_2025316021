@@ -12,6 +12,14 @@ class AnimationViewerTests(unittest.TestCase):
 
     def test_walk_cycle_has_sixteen_frames(self):
         self.assertEqual(len(viewer.WALK_CLIP.frames), 16)
+        self.assertEqual(viewer.WALK_CLIP.frames[0].left, 16)
+        self.assertEqual(viewer.WALK_CLIP.frames[-1].left, 496)
+
+    def test_attack_frames_follow_sheet_cell_offset(self):
+        self.assertEqual(
+            [frame.left for frame in viewer.ATTACK_CLIP.frames],
+            [16, 48, 80, 112, 144],
+        )
 
     def test_starting_character_is_not_clipped_by_left_edge(self):
         half_width = viewer.FRAME_WIDTH * viewer.SPRITE_SCALE / 2
