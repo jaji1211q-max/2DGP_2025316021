@@ -204,7 +204,16 @@ def main():
         validate_clips(sprite_sheet.w, sprite_sheet.h)
         state = AnimationState()
         last_time = perf_counter()
-        while True:
+        running = True
+        while running:
+            for event in get_events():
+                if event.type == SDL_QUIT or (
+                    event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE
+                ):
+                    running = False
+            if not running:
+                break
+
             current_time = perf_counter()
             delta_time = min(current_time - last_time, 0.05)
             last_time = current_time
