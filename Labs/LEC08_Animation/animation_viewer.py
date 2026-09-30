@@ -42,10 +42,23 @@ ATTACK_CLIP = AnimationClip(
 )
 
 
+def validate_clips(sheet_width: int, sheet_height: int) -> None:
+    for clip in (WALK_CLIP, JUMP_CLIP, ATTACK_CLIP):
+        for frame in clip.frames:
+            if (
+                frame.left < 0
+                or frame.top < 0
+                or frame.left + frame.width > sheet_width
+                or frame.top + frame.height > sheet_height
+            ):
+                raise ValueError(f"Sprite frame is outside the sheet: {frame}")
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
         sprite_sheet = load_image(str(SPRITE_PATH))
+        validate_clips(sprite_sheet.w, sprite_sheet.h)
         clear_canvas()
         sprite_sheet.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
         update_canvas()
