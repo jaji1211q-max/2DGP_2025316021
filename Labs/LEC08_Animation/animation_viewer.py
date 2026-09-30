@@ -162,6 +162,25 @@ def update_attack(state: AnimationState, delta_time: float) -> None:
         enter_phase(state, Phase.WALK_TO_LEFT)
 
 
+def update_walk_to_left(state: AnimationState, delta_time: float) -> None:
+    state.facing_right = False
+    state.x = move_toward(state.x, START_X, WALK_SPEED * delta_time)
+    if state.x <= START_X:
+        enter_phase(state, Phase.WALK_TO_CENTER)
+
+
+def update_state(state: AnimationState, delta_time: float) -> None:
+    if state.phase is Phase.WALK_TO_CENTER:
+        update_walk_to_center(state, delta_time)
+    elif state.phase is Phase.JUMP:
+        update_jump(state, delta_time)
+    elif state.phase is Phase.ATTACK:
+        update_attack(state, delta_time)
+    else:
+        update_walk_to_left(state, delta_time)
+    advance_frame(state, delta_time)
+
+
 def draw_scene(grass) -> None:
     clear_canvas()
     grass.draw(CANVAS_WIDTH // 2, 150, CANVAS_WIDTH, 100)
