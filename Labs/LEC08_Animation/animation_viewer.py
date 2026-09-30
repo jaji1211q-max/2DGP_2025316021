@@ -128,6 +128,20 @@ def move_toward(current: float, target: float, distance: float) -> float:
     return max(current - distance, target)
 
 
+def enter_phase(state: AnimationState, phase: Phase) -> None:
+    state.phase = phase
+    state.frame_index = 0
+    state.frame_elapsed = 0.0
+    state.action_elapsed = 0.0
+
+
+def update_walk_to_center(state: AnimationState, delta_time: float) -> None:
+    state.facing_right = True
+    state.x = move_toward(state.x, CENTER_X, WALK_SPEED * delta_time)
+    if state.x >= CENTER_X:
+        enter_phase(state, Phase.JUMP)
+
+
 def draw_scene(grass) -> None:
     clear_canvas()
     grass.draw(CANVAS_WIDTH // 2, 150, CANVAS_WIDTH, 100)
