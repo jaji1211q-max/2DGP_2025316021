@@ -122,6 +122,12 @@ def advance_frame(state: AnimationState, delta_time: float) -> None:
             state.frame_index = min(state.frame_index + 1, len(clip.frames) - 1)
 
 
+def move_toward(current: float, target: float, distance: float) -> float:
+    if current < target:
+        return min(current + distance, target)
+    return max(current - distance, target)
+
+
 def draw_scene(grass) -> None:
     clear_canvas()
     grass.draw(CANVAS_WIDTH // 2, 150, CANVAS_WIDTH, 100)
