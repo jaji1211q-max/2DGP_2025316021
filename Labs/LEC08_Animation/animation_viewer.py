@@ -13,12 +13,11 @@ GRASS_PATH = Path(__file__).with_name("grass.png")
 FRAME_WIDTH = 32
 FRAME_HEIGHT = 48
 SPRITE_SCALE = 8
-START_X = 120.0
+START_X = 160.0
 CENTER_X = CANVAS_WIDTH / 2
 GROUND_Y = 400.0
 WALK_SPEED = 240.0
 JUMP_DURATION = 0.9
-ATTACK_DURATION = len(ATTACK_CLIP.frames) * ATTACK_CLIP.frame_duration
 
 
 @dataclass(frozen=True)
@@ -50,6 +49,7 @@ ATTACK_CLIP = AnimationClip(
     frames=tuple(SpriteFrame(left, 144) for left in (0, 32, 64, 96, 128)),
     frame_duration=0.10,
 )
+ATTACK_DURATION = len(ATTACK_CLIP.frames) * ATTACK_CLIP.frame_duration
 
 
 class Phase(Enum):
@@ -147,7 +147,10 @@ def update_jump(state: AnimationState, delta_time: float) -> None:
     state.action_elapsed += delta_time
     progress = min(state.action_elapsed / JUMP_DURATION, 1.0)
     state.y = GROUND_Y + 180 * 4 * progress * (1 - progress)
-    state.frame_index = min(int(progress * len(JUMP_CLIP.frames)), len(JUMP_CLIP.frames) - 1)
+    state.frame_index = min(
+        int(progress * len(JUMP_CLIP.frames)),
+        len(JUMP_CLIP.frames) - 1,
+    )
     if progress >= 1.0:
         state.y = GROUND_Y
         enter_phase(state, Phase.ATTACK)
