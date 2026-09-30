@@ -46,7 +46,12 @@ JUMP_CLIP = AnimationClip(
     frame_duration=0.12,
 )
 ATTACK_CLIP = AnimationClip(
-    frames=tuple(SpriteFrame(left, 144) for left in (16, 48, 80, 112, 144)),
+    frames=(
+        SpriteFrame(0, 304, 48),
+        SpriteFrame(56, 304, 56),
+        SpriteFrame(112, 304, 72),
+        SpriteFrame(184, 304, 56),
+    ),
     frame_duration=0.10,
 )
 ATTACK_DURATION = len(ATTACK_CLIP.frames) * ATTACK_CLIP.frame_duration

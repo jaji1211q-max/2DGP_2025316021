@@ -36,10 +36,13 @@ class AnimationViewerTests(unittest.TestCase):
         self.assertEqual(viewer.WALK_CLIP.frames[0].left, 16)
         self.assertEqual(viewer.WALK_CLIP.frames[-1].left, 496)
 
-    def test_attack_frames_follow_sheet_cell_offset(self):
+    def test_attack_uses_first_four_frames_of_second_row_from_bottom(self):
         self.assertEqual(
-            [frame.left for frame in viewer.ATTACK_CLIP.frames],
-            [16, 48, 80, 112, 144],
+            [(frame.left, frame.top, frame.width) for frame in viewer.ATTACK_CLIP.frames],
+            [(0, 304, 48), (56, 304, 56), (112, 304, 72), (184, 304, 56)],
+        )
+        self.assertTrue(
+            all(frame.height == viewer.FRAME_HEIGHT for frame in viewer.ATTACK_CLIP.frames)
         )
 
     def test_starting_character_is_not_clipped_by_left_edge(self):
