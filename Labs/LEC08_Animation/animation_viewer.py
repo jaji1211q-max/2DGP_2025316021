@@ -7,6 +7,7 @@ from pico2d import *
 CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 800
 SPRITE_PATH = Path(__file__).with_name("sprites_fullsize.png")
+GRASS_PATH = Path(__file__).with_name("grass.png")
 FRAME_WIDTH = 32
 FRAME_HEIGHT = 48
 SPRITE_SCALE = 8
@@ -77,12 +78,18 @@ def draw_frame(
     )
 
 
+def draw_scene(grass) -> None:
+    clear_canvas()
+    grass.draw(CANVAS_WIDTH // 2, 150, CANVAS_WIDTH, 100)
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
         sprite_sheet = load_image(str(SPRITE_PATH))
+        grass = load_image(str(GRASS_PATH))
         validate_clips(sprite_sheet.w, sprite_sheet.h)
-        clear_canvas()
+        draw_scene(grass)
         draw_frame(
             sprite_sheet,
             WALK_CLIP.frames[0],
