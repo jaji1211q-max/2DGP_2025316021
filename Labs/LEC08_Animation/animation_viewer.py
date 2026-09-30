@@ -152,6 +152,16 @@ def update_jump(state: AnimationState, delta_time: float) -> None:
         enter_phase(state, Phase.ATTACK)
 
 
+def update_attack(state: AnimationState, delta_time: float) -> None:
+    state.action_elapsed += delta_time
+    state.frame_index = min(
+        int(state.action_elapsed / ATTACK_CLIP.frame_duration),
+        len(ATTACK_CLIP.frames) - 1,
+    )
+    if state.action_elapsed >= ATTACK_DURATION:
+        enter_phase(state, Phase.WALK_TO_LEFT)
+
+
 def draw_scene(grass) -> None:
     clear_canvas()
     grass.draw(CANVAS_WIDTH // 2, 150, CANVAS_WIDTH, 100)
