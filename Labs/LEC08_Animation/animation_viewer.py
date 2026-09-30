@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum, auto
 from pathlib import Path
+from time import perf_counter
 
 from pico2d import *
 
@@ -178,7 +179,16 @@ def update_state(state: AnimationState, delta_time: float) -> None:
         update_attack(state, delta_time)
     else:
         update_walk_to_left(state, delta_time)
-    advance_frame(state, delta_time)
+    if state.phase in (Phase.WALK_TO_CENTER, Phase.WALK_TO_LEFT):
+        advance_frame(state, delta_time)
+
+
+def render(state: AnimationState, sprite_sheet, grass) -> None:
+    draw_scene(grass)
+    clip = clip_for_phase(state.phase)
+    frame = clip.frames[state.frame_index]
+    draw_frame(sprite_sheet, frame, state.x, state.y, state.facing_right)
+    update_canvas()
 
 
 def draw_scene(grass) -> None:
@@ -192,15 +202,15 @@ def main():
         sprite_sheet = load_image(str(SPRITE_PATH))
         grass = load_image(str(GRASS_PATH))
         validate_clips(sprite_sheet.w, sprite_sheet.h)
-        draw_scene(grass)
-        draw_frame(
-            sprite_sheet,
-            WALK_CLIP.frames[0],
-            CANVAS_WIDTH // 2,
-            CANVAS_HEIGHT // 2,
-        )
-        update_canvas()
-        delay(0.5)
+        state = AnimationState()
+        last_time = perf_counter()
+        while True:
+            current_time = perf_counter()
+            delta_time = min(current_time - last_time, 0.05)
+            last_time = current_time
+            update_state(state, delta_time)
+            render(state, sprite_sheet, grass)
+            delay(0.01)
     finally:
         close_canvas()
 
