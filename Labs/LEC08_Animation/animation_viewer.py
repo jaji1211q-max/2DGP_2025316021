@@ -22,6 +22,18 @@ class SpriteFrame:
         return sheet_height - self.top - self.height
 
 
+@dataclass(frozen=True)
+class AnimationClip:
+    frames: tuple[SpriteFrame, ...]
+    frame_duration: float
+
+
+WALK_CLIP = AnimationClip(
+    frames=tuple(SpriteFrame(left, 0) for left in range(0, 512, FRAME_WIDTH)),
+    frame_duration=0.08,
+)
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
