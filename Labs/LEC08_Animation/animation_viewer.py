@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from enum import Enum, auto
 from pathlib import Path
 
 from pico2d import *
@@ -42,6 +43,24 @@ ATTACK_CLIP = AnimationClip(
     frames=tuple(SpriteFrame(left, 144) for left in (0, 32, 64, 96, 128)),
     frame_duration=0.10,
 )
+
+
+class Phase(Enum):
+    WALK_TO_CENTER = auto()
+    JUMP = auto()
+    ATTACK = auto()
+    WALK_TO_LEFT = auto()
+
+
+@dataclass
+class AnimationState:
+    phase: Phase = Phase.WALK_TO_CENTER
+    x: float = 120.0
+    y: float = 400.0
+    facing_right: bool = True
+    frame_index: int = 0
+    frame_elapsed: float = 0.0
+    action_elapsed: float = 0.0
 
 
 def validate_clips(sheet_width: int, sheet_height: int) -> None:
